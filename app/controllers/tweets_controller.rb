@@ -28,7 +28,7 @@ class TweetsController < ApplicationController
   def create
     @tweet = Tweet.create(tweet_params)
 
-    get_tagged(@tweet)
+    @tweet = get_tagged(@tweet)
 
     respond_to do |format|
       if @tweet.save
@@ -60,7 +60,7 @@ class TweetsController < ApplicationController
   def destroy
     @tweet.destroy
     respond_to do |format|
-      format.html { redirect_to tweets_url, notice: 'Tweet was successfully destroyed.' }
+      format.html { redirect_to root_path, notice: 'Tweet was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

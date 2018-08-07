@@ -17,7 +17,7 @@ class Tweet < ApplicationRecord
 
     if index
       url = arr[index]
-		  arr[index] = "<a href='#{self.link}' target='_blank'>#{url}</a>"
+		  arr[index] = "<a class = 'link' href='#{self.link}' target='_blank'>#{url}</a>"
 	  end
 
 	   self.message = arr.join(" ")

@@ -6,11 +6,12 @@ module TweetHelper
       if word[0] == "#"
         tag = Tag.find_or_create_by(phrase: word.downcase)
         TweetTag.create(tag_id: tag.id, tweet_id: tweet.id)
-        message_arr[index] = "<a href = '/tag_tweets?id=#{tag.id}'>#{word}</a>"
+        message_arr[index] = "<a class = 'link' href = '/tag_tweets?id=#{tag.id}'>#{word}</a>"
       end
     end
 
     tweet.message = message_arr.join(' ')
     tweet.save
+    return tweet
   end
 end

@@ -1,6 +1,24 @@
 <div class='well'>
-  <strong><%= link_to tweet.user.username, show_user_path(id: tweet.user_id) %></strong> says...
-  <span class="pull-right"><%= tweet.created_at %></span>
+  <strong><%= link_to tweet.user.username, show_user_path(id: tweet.user_id), class: 'link' %></strong> says...
+  <table class ='pull-right'>
+    <tr>
+      <td><span class="pull-right">
+      <% if tweet.created_at < 1.day.ago %>
+        <%= tweet.created_at.strftime('%b %e')%>
+      <% else %>
+        <%= time_ago_in_words(tweet.created_at) %> ago
+      <% end %></span></td>
+    </tr>
+    <tr>
+      <td>
+        <span class='pull-right'>
+          <% if current_user.id == tweet.user_id %>
+              <%= link_to "Delete", tweet, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+          <% end %>
+        </td>
+      </span>
+    </tr>
+  </table>
   <p>
     <%= tweet.message.html_safe %>
   </p>

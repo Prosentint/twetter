@@ -1,6 +1,17 @@
 <div class='row'>
   <div class='col-md-3'>
 
+    <div class='panel panel-default'>
+      <div class='panel-heading'>
+        <h3 class='panel-title'><%= current_user.username %>'s feed</h3>
+      </div>
+      <div class='panel-body'>
+        <%= pluralize current_user.tweets.count, 'tweet' %>
+        <br />
+        Following <%= pluralize current_user.following.count, 'user' %>
+      </div>
+    </div>
+
   </div>
 
   <div class='col-md-6'>
@@ -8,9 +19,22 @@
       <%= render 'tweets/tweet', tweet: tweet %>
     <% end %>
     <%= render 'tweets/form', tweet: Tweet.new %>
+  </div>
 
   <div class='col-md-3'>
-
-
+    <div class='panel panel-default'>
+      <div class='panel-heading'>
+        <h3 class="panel-title">Tags</h3>
+      </div>
+      <div class='panel-body'
+        <ul>
+          <% @tags.each do |tag| %>
+            <li>
+              <%= link_to tag.phrase, tag_tweets_path(id: tag.id) %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
   </div>
 </div>
